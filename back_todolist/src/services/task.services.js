@@ -1,4 +1,4 @@
-import { pool } from '../config/db/index.js';
+import { pool } from '../db/index.js';
 import { env } from '../config/env.js';
 
 export async function createTask(titre, description, theme_id, status_id, priority_id, created_at,updated_at) {

@@ -1,9 +1,11 @@
 import { env } from '../config/env.js';
-import { pool, testConnection } from '../config/db/index.js';
+import { pool, testConnection } from '../db/index.js';
 
 export async function createTask(req, res) {
 
     console.log('createTask');
+
+    
 
 
 }
