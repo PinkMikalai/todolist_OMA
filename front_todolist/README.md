@@ -1,16 +1,82 @@
-# React + Vite
+# Todolist Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application React pour gérer vos tâches avec filtres, recherche et tri.
 
-Currently, two official plugins are available:
+## 🚀 Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Installer les dépendances
+npm install
+```
 
-## React Compiler
+## ⚙️ Configuration
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Créez un fichier `.env` à la racine du projet avec :
 
-## Expanding the ESLint configuration
+```env
+VITE_API_URL=http://localhost:3000
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Remplacez le port si votre backend utilise un autre port.
+
+## 🏃 Démarrage
+
+```bash
+# Lancer le serveur de développement
+npm run dev
+```
+
+L'application sera accessible sur `http://localhost:5173` (ou le port indiqué par Vite).
+
+## 📁 Structure du projet
+
+```
+src/
+├── components/          # Composants réutilisables
+│   ├── TaskCard.jsx    # Carte d'affichage d'une tâche
+│   ├── TaskForm.jsx    # Formulaire de création/modification
+│   ├── FilterBar.jsx   # Barre de filtres et recherche
+│   └── TaskList.jsx    # Liste des tâches
+├── pages/              # Pages de l'application
+│   └── HomePage.jsx    # Page principale
+├── services/           # Services API
+│   └── api.js          # Fonctions pour appeler le backend
+└── utils/              # Utilitaires
+    └── constants.js    # Constantes (couleurs, options de tri)
+```
+
+## 🎯 Fonctionnalités
+
+- ✅ Création, modification et suppression de tâches
+- 🔍 Recherche par titre ou description
+- 🎨 Filtrage par thème, statut et priorité
+- 📊 Tri par date, priorité ou titre
+- 🎯 Changement de statut directement depuis la carte
+- 📱 Design responsive
+
+## 🔌 API Backend requise
+
+Le frontend s'attend à ce que le backend expose les endpoints suivants :
+
+- `GET /api/tasks` - Récupérer toutes les tâches
+- `GET /api/tasks/:id` - Récupérer une tâche par ID
+- `POST /api/tasks` - Créer une nouvelle tâche
+- `PUT /api/tasks/:id` - Mettre à jour une tâche
+- `DELETE /api/tasks/:id` - Supprimer une tâche
+- `GET /api/themes` - Récupérer tous les thèmes
+- `GET /api/statuses` - Récupérer tous les statuts
+- `GET /api/priorities` - Récupérer toutes les priorités
+
+## 📦 Build pour production
+
+```bash
+npm run build
+```
+
+Les fichiers compilés seront dans le dossier `dist/`.
+
+## 🧪 Linter
+
+```bash
+npm run lint
+```
