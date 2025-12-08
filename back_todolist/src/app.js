@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-// const router = require('./routes');
+const router = require('./routes/index.js');
 
 const app = http.createServer(async (req, res) => {
   // Middleware CORS
