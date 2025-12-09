@@ -1,7 +1,7 @@
-const { pool } = require('../db/index.js');
-const { env } = require('../config/env.js');
+import { pool } from '../db/index.js';
+import { env } from '../config/env.js';
 
-async function createTask(titre, description, theme_id, status_id, priority_id, created_at,updated_at) {
+export async function createTask(titre, description, theme_id, status_id, priority_id, created_at,updated_at) {
 
     //validation de creation de notre task:
     if(!titre || !description || !theme_id || !status_id || !priority_id || !created_at || !updated_at) {
@@ -26,5 +26,3 @@ async function createTask(titre, description, theme_id, status_id, priority_id, 
         updated_at: updated_at
     };
 }
-
-module.exports = { createTask };
