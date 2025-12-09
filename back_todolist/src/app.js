@@ -16,7 +16,11 @@ const app = http.createServer(async (req, res) => {
 
   // Parse URL
   const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
+  // Normaliser le path (enlever le slash final sauf pour la racine)
+  let path = parsedUrl.pathname;
+  if (path.length > 1 && path.endsWith('/')) {
+    path = path.slice(0, -1);
+  }
   const method = req.method;
 
   // Router
