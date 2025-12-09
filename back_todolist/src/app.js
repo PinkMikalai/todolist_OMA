@@ -1,6 +1,6 @@
-const http = require('http');
-const url = require('url');
-const router = require('./routes/index.js');
+import http from 'http';
+import url from 'url';
+import router from './routes/index.js';
 
 const app = http.createServer(async (req, res) => {
   // Middleware CORS
@@ -28,4 +28,4 @@ const app = http.createServer(async (req, res) => {
   }
 });
 
-module.exports = app;
+export default app;

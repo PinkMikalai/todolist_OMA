@@ -1,3 +1,4 @@
+import { createTask, getTasks, getTaskById, updateTask, deleteTask } from '../controller/todolist.controller.js';
 // Router class
 class Router {
   constructor() {
@@ -55,35 +56,17 @@ class Router {
 
 const router = new Router();
 
-// affiche tout les taches
-router.get('/api/todos', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'Toute les tâches' }));
-  });
+// affiche les taches
+router.get('/api/todos', getTasks);
+router.get('/api/todos/:id', getTaskById);
 
-  // affiche une tache
-  router.get('/api/todos/:id', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'La tâche' }));
-  });
 
-  // crée une tache
-  router.post('/api/todos', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'La tâche a été créée' }));
-  });
+  // crée  modif une tache
+router.post('/api/todos', createTask);
+router.put('/api/todos/:id', updateTask);
 
-  // met à jour une tache
-  router.put('/api/todos/:id', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'La tâche a été mise à jour' }));
-  });
 
   // supprime une tache
-  router.delete('/api/todos/:id', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ message: 'La tâche a été supprimée' }));
-  });
-  
+router.delete('/api/todos/:id', deleteTask);
 
-module.exports = router;
+export default router;

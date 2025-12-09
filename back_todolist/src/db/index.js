@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import { env } from '../config/env.js';
+import { env } from '../env.js';
 
 export const pool = mysql.createPool({
     host: env.db.host,
@@ -7,7 +7,6 @@ export const pool = mysql.createPool({
     user: env.db.user,
     password: env.db.password,
     database: env.db.database,
-    connectionLimit: 10, //limite a 10 connexion simultanées.
 });
 
 export async function testConnection() {
