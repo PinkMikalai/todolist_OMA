@@ -20,3 +20,11 @@ export async function getTasks(req, res) {
 export async function getTaskById(req, res) {
     console.log('getTaskById');
 }
+
+export async function updateTask(req, res) {
+    console.log('updateTask');
+}
+
+export async function deleteTask(req, res) {
+    console.log('deleteTask');
+}
