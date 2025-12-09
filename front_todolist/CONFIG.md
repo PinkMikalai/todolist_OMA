@@ -5,10 +5,10 @@
 Créez un fichier `.env` à la racine du dossier `front_todolist` avec le contenu suivant :
 
 ```env
-VITE_API_URL=http://localhost:3000
+VITE_API_URL=http://localhost:4000
 ```
 
-**Important :** Remplacez `3000` par le port sur lequel votre backend écoute.
+**Important :** Le port par défaut est `4000` (port du backend). Changez-le si votre backend utilise un autre port.
 
 ## Note pour Git
 

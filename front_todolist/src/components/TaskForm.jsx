@@ -96,7 +96,23 @@ function TaskForm({ task, themes, statuses, priorities, onSubmit, onCancel }) {
 
     setIsSubmitting(true);
     try {
-      await onSubmit(formData);
+      // Préparer les données à envoyer
+      const dataToSend = { ...formData };
+      
+      // Si c'est une nouvelle tâche, ajouter les dates (requis par le backend)
+      if (!task) {
+        const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        dataToSend.created_at = now;
+        dataToSend.updated_at = now;
+      } else {
+        // Pour une modification, mettre à jour updated_at
+        const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        dataToSend.updated_at = now;
+        // Garder la date de création originale
+        dataToSend.created_at = task.created_at;
+      }
+      
+      await onSubmit(dataToSend);
       
       // Si c'est une nouvelle tâche, réinitialiser le formulaire
       if (!task) {
