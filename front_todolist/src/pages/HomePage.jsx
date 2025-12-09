@@ -161,11 +161,15 @@ function HomePage() {
   // Modifier une tâche existante
   async function handleUpdateTask(taskData) {
     try {
-      const updatedTask = await updateTask(editingTask.Id, taskData);
+      // Le backend utilise 'id' en minuscule
+      const taskId = editingTask.id || editingTask.Id;
+      const updatedTask = await updateTask(taskId, taskData);
       // Remplacer l'ancienne tâche par la nouvelle dans la liste
-      const newTasks = tasks.map((task) =>
-        task.Id === editingTask.Id ? updatedTask : task
-      );
+      const newTasks = tasks.map((task) => {
+        const currentId = task.id || task.Id;
+        const editingId = editingTask.id || editingTask.Id;
+        return currentId === editingId ? updatedTask : task;
+      });
       setTasks(newTasks);
       setEditingTask(null);
       setShowForm(false);
@@ -181,8 +185,11 @@ function HomePage() {
   async function handleDeleteTask(taskId) {
     try {
       await deleteTask(taskId);
-      // Retirer la tâche de la liste
-      const newTasks = tasks.filter((task) => task.Id !== taskId);
+      // Retirer la tâche de la liste (gérer id et Id)
+      const newTasks = tasks.filter((task) => {
+        const currentId = task.id || task.Id;
+        return currentId !== taskId;
+      });
       setTasks(newTasks);
       setError(null);
     } catch (err) {
@@ -195,18 +202,29 @@ function HomePage() {
   // Changer le statut d'une tâche
   async function handleStatusChange(taskId, newStatusId) {
     try {
-      // Trouver la tâche à modifier
-      const task = tasks.find((t) => t.Id === taskId);
+      // Trouver la tâche à modifier (gérer id et Id)
+      const task = tasks.find((t) => {
+        const currentId = t.id || t.Id;
+        return currentId === taskId;
+      });
       if (!task) return;
 
       // Mettre à jour avec le nouveau statut
-      const updatedTask = await updateTask(taskId, {
+      const currentTaskId = task.id || task.Id;
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const updatedTask = await updateTask(currentTaskId, {
         ...task,
         status_id: newStatusId,
+        updated_at: now,
+        // Garder la date de création originale
+        created_at: task.created_at,
       });
 
       // Remplacer dans la liste
-      const newTasks = tasks.map((t) => (t.Id === taskId ? updatedTask : t));
+      const newTasks = tasks.map((t) => {
+        const currentId = t.id || t.Id;
+        return currentId === taskId ? updatedTask : t;
+      });
       setTasks(newTasks);
       setError(null);
     } catch (err) {
@@ -238,7 +256,7 @@ function HomePage() {
     <div className="home-page">
       {/* En-tête */}
       <header className="app-header">
-        <h1 className="app-title">📋 Todolist OMA</h1>
+        <h1 className="app-title">MAO</h1>
         <p className="app-subtitle">Gérez vos tâches efficacement</p>
       </header>
 

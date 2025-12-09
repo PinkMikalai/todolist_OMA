@@ -22,7 +22,9 @@ function TaskCard({ task, themes, statuses, priorities, onEdit, onDelete, onStat
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
       setIsDeleting(true);
       try {
-        await onDelete(task.Id);
+        // Le backend utilise 'id' en minuscule, mais on gère les deux cas
+        const taskId = task.id || task.Id;
+        await onDelete(taskId);
       } finally {
         setIsDeleting(false);
       }
@@ -33,7 +35,9 @@ function TaskCard({ task, themes, statuses, priorities, onEdit, onDelete, onStat
   async function handleStatusChange(e) {
     const newStatusId = parseInt(e.target.value);
     if (newStatusId !== task.status_id) {
-      await onStatusChange(task.Id, newStatusId);
+      // Le backend utilise 'id' en minuscule, mais on gère les deux cas
+      const taskId = task.id || task.Id;
+      await onStatusChange(taskId, newStatusId);
     }
   }
 
