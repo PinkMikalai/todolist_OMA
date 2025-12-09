@@ -1,7 +1,7 @@
-import { env } from '../config/env.js';
-import { pool, testConnection } from '../db/index.js';
+const { env } = require('../config/env.js');
+const { pool, testConnection } = require('../db/index.js');
 
-export async function createTask(req, res) {
+async function createTask(req, res) {
 
     console.log('createTask');
 
@@ -12,19 +12,21 @@ export async function createTask(req, res) {
 
 //afficher toute les routes de la todolist
 
-export async function getTasks(req, res) {
+async function getTasks(req, res) {
     console.log('getTasks');
 }
 
 //afficher todolist par son id
-export async function getTaskById(req, res) {
+async function getTaskById(req, res) {
     console.log('getTaskById');
 }
 
-export async function updateTask(req, res) {
+async function updateTask(req, res) {
     console.log('updateTask');
 }
 
-export async function deleteTask(req, res) {
+async function deleteTask(req, res) {
     console.log('deleteTask');
 }
+
+module.exports = { createTask, getTasks, getTaskById, updateTask, deleteTask };

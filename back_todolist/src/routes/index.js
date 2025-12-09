@@ -1,4 +1,4 @@
-import { createTask, getTasks, getTaskById, updateTask, deleteTask } from '../controller/todolist.controller.js';
+const { createTask, getTasks, getTaskById, updateTask, deleteTask } = require('../controller/todolist.controller.js');
 // Router class
 class Router {
   constructor() {
@@ -69,4 +69,4 @@ router.put('/api/todos/:id', updateTask);
   // supprime une tache
 router.delete('/api/todos/:id', deleteTask);
 
-export default router;
+module.exports = router;
