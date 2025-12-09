@@ -1,5 +1,5 @@
 //importer l'outil dotenv
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 
 
@@ -17,7 +17,7 @@ for(const key of required) {
 
 
 // recuperer les information de mon fichier .env
-export const env = {
+const env = {
     port: process.env.PORT ?? 4000,
     db: {
         host: process.env.DB_HOST,
@@ -27,3 +27,5 @@ export const env = {
         database: process.env.DB_NAME
     },
 }
+
+module.exports = { env };
